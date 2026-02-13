@@ -3,33 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Kyra 😎</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <title>For Kyra Karissa 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --accent-pink: #ff69b4;
-            --bright-teal: #00f2ff;
-            --glass: rgba(0, 0, 0, 0.6);
+            --pink: #ff85c0;
+            --mint: #00ffb3;
+            --glass: rgba(15, 0, 5, 0.7);
         }
 
         body, html {
             margin: 0; padding: 0;
             height: 100%; width: 100%;
-            background: #0f0f0f;
+            background: #0d0106;
             font-family: 'Poppins', sans-serif;
             color: white;
             overflow: hidden;
         }
 
-        /* ===== Background ===== */
-        .bg-layer {
+        /* ===== Floral Background Garden ===== */
+        .bg-garden {
             position: fixed;
             inset: 0;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('floral_bg1.jpg') center/cover;
-            filter: blur(3px);
+            background: radial-gradient(circle at center, rgba(255, 133, 192, 0.15) 0%, transparent 70%);
             z-index: -1;
         }
 
+        /* Animated Petals */
+        .petal {
+            position: absolute;
+            font-size: 20px;
+            pointer-events: none;
+            animation: fall linear forwards;
+            opacity: 0.6;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ===== Stage Logic ===== */
         .stage {
             position: absolute;
             inset: 0;
@@ -39,130 +54,171 @@
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.7s ease-in-out;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             padding: 20px;
         }
 
         .stage.active { opacity: 1; visibility: visible; }
 
-        /* ===== Photo Frames (Friendly Captions) ===== */
-        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
-        
+        /* ===== UI Components ===== */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 133, 192, 0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--pink); margin: 0; }
+        h2 { font-weight: 300; line-height: 1.4; }
+
+        /* ===== HD Gallery (Sweet Captions) ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
         .polaroid {
             background: white;
-            padding: 10px 10px 35px 10px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            padding: 8px 8px 35px 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             transform: rotate(var(--r));
-            color: #444;
-            font-weight: 700;
-            font-size: 0.85rem;
             position: relative;
         }
 
-        .polaroid img { width: 120px; height: 150px; object-fit: cover; display: block; }
-        .polaroid::after { content: var(--cap); position: absolute; bottom: 10px; left: 0; width: 100%; text-align: center; }
+        .img-wrap {
+            width: 100%;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
 
-        /* ===== UI Elements ===== */
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            padding: 40px;
-            border-radius: 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            max-width: 400px;
+        .polaroid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* HD Fix: No stretching */
+            display: block;
+        }
+
+        .polaroid::after {
+            content: var(--cap);
+            position: absolute;
+            bottom: 8px; left: 0; width: 100%;
+            font-family: 'Dancing Script', cursive;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        /* ===== Interaction ===== */
+        input {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid var(--pink);
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            width: 100%;
+            margin: 20px 0;
+            outline: none;
         }
 
         button {
-            padding: 12px 28px;
+            padding: 15px 35px;
             border-radius: 50px;
             border: none;
+            font-weight: bold;
             cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s;
-            margin: 10px;
+            transition: 0.3s;
         }
 
-        .btn-yes { background: var(--bright-teal); color: #000; box-shadow: 0 0 15px rgba(0,242,255,0.4); }
+        .btn-pink { background: var(--pink); color: white; }
+        .btn-mint { background: var(--mint); color: black; }
         .btn-no { background: #ff4444; color: white; position: relative; }
-        .btn-next { background: var(--accent-pink); color: white; }
 
-        /* ===== Final Transition ===== */
-        #thanksScreen {
+        /* ===== Finale ===== */
+        #thanks {
             position: fixed;
             inset: 0;
-            background: #000;
-            z-index: 1000;
+            background: black;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            transition: 1.5s ease;
+            transition: 2s;
         }
-        #thanksScreen.show { opacity: 1; visibility: visible; }
-
-        .thanks-msg {
-            font-size: 3rem;
-            font-weight: 800;
-            text-align: center;
-            background: linear-gradient(to right, var(--accent-pink), var(--bright-teal));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        #thanks.active { opacity: 1; visibility: visible; }
     </style>
 </head>
 <body>
 
-    <div class="bg-layer"></div>
+<div class="bg-garden" id="garden"></div>
 
-    <section id="page1" class="stage active">
-        <div class="glass-card">
-            <h1 style="color: var(--accent-pink); margin-top: 0;">Hey Kyra! 👋</h1>
-            <p style="opacity: 0.8; font-size: 0.9rem;">Quick security check...<br>What's your favorite food? 😏</p>
-            <input type="password" id="passInput" style="padding:12px; border-radius:10px; border:none; width:80%; text-align:center; margin-bottom:15px;">
-            <br>
-            <button class="btn-next" onclick="checkPass()">Let's Go ➡️</button>
-        </div>
-    </section>
-
-    <section id="page2" class="stage">
-        <h1>Just some cool shots ✨</h1>
-        <div class="gallery">
-            <div class="polaroid" style="--r:-5deg; --cap:'Looking Great!'"><img src="kyra.png"></div>
-            <div class="polaroid" style="--r:4deg; --cap:'Pure Vibes 😎'"><img src="kyra2.png"></div>
-            <div class="polaroid" style="--r:-3deg; --cap:'Always Smiling'"><img src="kyra3.png"></div>
-            <div class="polaroid" style="--r:6deg; --cap:'Stay Epic ⚡'"><img src="kyra4.jpg"></div>
-        </div>
-        <button class="btn-next" onclick="go(3)">One more thing... ➡️</button>
-    </section>
-
-    <section id="page3" class="stage">
-        <div class="glass-card">
-            <h2 style="line-height: 1.4;">I really hope this made you feel much better today! 🌸</h2>
-            <div style="display: flex; gap: 15px; justify-content: center; position: relative; min-height: 80px; align-items: center;">
-                <button class="btn-yes" onclick="finish()">Yea I do! 😏</button>
-                <button id="noBtn" class="btn-no" onmouseover="dodge()">Nope 💀</button>
-            </div>
-        </div>
-    </section>
-
-    <div id="thanksScreen">
-        <div class="thanks-msg">THANK YOU! 🌸</div>
-        <p style="opacity: 0.5; margin-top: 20px;">Take care of yourself.</p>
+<section id="page1" class="stage active">
+    <div class="glass-card">
+        <h1>Hey Kyraaa...</h1>
+        <p style="opacity: 0.7;">Enter your favorite food to unlock 🍗</p>
+        <input type="password" id="passInput" placeholder="Password here...">
+        <br>
+        <button class="btn-pink" onclick="unlock()">Unlock the Garden 🌸</button>
     </div>
+</section>
 
-    <audio id="bgm" loop><source src="bgm.mp3" type="audio/mpeg"></audio>
-    <audio id="happy"><source src="happy.mp3" type="audio/mpeg"></audio>
+<section id="page2" class="stage">
+    <h2 style="font-family: 'Dancing Script', cursive; font-size: 2.5rem;">Some memories for you...</h2>
+    <div class="gallery">
+        <div class="polaroid" style="--r:-4deg; --cap:'Pure Radiance ✨'"><div class="img-wrap"><img src="kyra.png"></div></div>
+        <div class="polaroid" style="--r:3deg; --cap:'That Smile 🌸'"><div class="img-wrap"><img src="kyra2.png"></div></div>
+        <div class="polaroid" style="--r:-2deg; --cap:'Stay Stunning ✨'"><div class="img-wrap"><img src="kyra3.png"></div></div>
+        <div class="polaroid" style="--r:5deg; --cap:'Always Glowing 💫'"><div class="img-wrap"><img src="kyra4.jpg"></div></div>
+    </div>
+    <button class="btn-pink" onclick="go(3)">Next ➡️</button>
+</section>
+
+<section id="page3" class="stage">
+    <div class="glass-card">
+        <h2>I really hope this made you feel much better today!</h2>
+        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px; position: relative; min-height: 60px;">
+            <button class="btn-mint" onclick="celebrate()">Yea I do! 😏</button>
+            <button id="noBtn" class="btn-no" onmouseover="dodge()">Nope 💀</button>
+        </div>
+    </div>
+</section>
+
+<div id="thanks">
+    <h1 style="font-size: 4rem;">THANK YOU! 🌸</h1>
+</div>
+
+<audio id="bgm" loop><source src="bgm.mp3" type="audio/mpeg"></audio>
+<audio id="happy"><source src="happy.mp3" type="audio/mpeg"></audio>
 
 <script>
     const bgm = document.getElementById("bgm");
     const happy = document.getElementById("happy");
 
-    function checkPass() {
+    // Falling Petal Logic
+    function spawnPetal() {
+        const petals = ['🌸', '🌺', '🌷', '🍃'];
+        const p = document.createElement('div');
+        p.className = 'petal';
+        p.innerHTML = petals[Math.floor(Math.random() * petals.length)];
+        p.style.left = Math.random() * 100 + 'vw';
+        p.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        document.getElementById('garden').appendChild(p);
+        setTimeout(() => p.remove(), 10000);
+    }
+    setInterval(spawnPetal, 500);
+
+    function unlock() {
         if(document.getElementById("passInput").value.toLowerCase() === "chickenwing") {
-            bgm.play().catch(() => {});
+            bgm.play().catch(()=>{});
             go(2);
         }
     }
@@ -172,50 +228,35 @@
         document.getElementById('page' + num).classList.add('active');
     }
 
-    // Move button away on hover
     function dodge() {
         const btn = document.getElementById("noBtn");
-        const x = (Math.random() - 0.5) * 300;
-        const y = (Math.random() - 0.5) * 300;
-        btn.style.transition = "0.2s";
+        const x = (Math.random() - 0.5) * 200;
+        const y = (Math.random() - 0.5) * 200;
         btn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
-    function finish() {
+    function celebrate() {
         // Fade BGM
-        let bVol = 1.0;
-        const bFade = setInterval(() => {
-            if(bVol > 0.1) { bVol -= 0.1; bgm.volume = bVol; }
-            else { bgm.pause(); clearInterval(bFade); }
+        let vol = 1.0;
+        const fadeOut = setInterval(() => {
+            if(vol > 0.1) { vol -= 0.1; bgm.volume = vol; }
+            else { bgm.pause(); clearInterval(fadeOut); }
         }, 100);
 
         happy.play();
 
-        // Particle Burst
-        for(let i=0; i<40; i++) {
-            setTimeout(() => {
-                const p = document.createElement('div');
-                p.innerHTML = ['✨','🌸','🎈'][Math.floor(Math.random()*3)];
-                p.style.position = 'fixed';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.top = '100vh';
-                p.style.fontSize = '24px';
-                document.body.appendChild(p);
-                p.animate([{transform:'translateY(0)'}, {transform:'translateY(-110vh)'}], 3000);
-                setTimeout(() => p.remove(), 3000);
-            }, i * 100);
+        // Explosion
+        for(let i=0; i<50; i++) {
+            setTimeout(spawnPetal, i * 50);
         }
 
-        // Final Transition
         setTimeout(() => {
-            document.getElementById("thanksScreen").classList.add("show");
-            
-            // Fade Happy Song
+            document.getElementById('thanks').classList.add('active');
             let hVol = 1.0;
             const hFade = setInterval(() => {
                 if(hVol > 0.05) { hVol -= 0.05; happy.volume = hVol; }
                 else { happy.pause(); clearInterval(hFade); }
-            }, 300);
+            }, 250);
         }, 4000);
     }
 </script>
