@@ -1,210 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Kyra Karissa 😎</title>
-<style>
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    overflow-x: hidden;
-    background: #000;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyra Karissa 🌸</title>
+    <style>
+        :root {
+            --soft-pink: #ffb7c5;
+            --hot-pink: #ff4da6;
+            --mint: #00ffb3;
+            --glass: rgba(255, 255, 255, 0.15);
+        }
 
-/* ===== Page Containers ===== */
-.page {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    top:0; left:0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    opacity: 0;
-    transition: opacity 1s ease;
-    overflow: hidden;
-}
+        body, html {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            background: #0e0108;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
 
-/* ===== Active Page ===== */
-.page.active {
-    opacity: 1;
-    z-index: 1;
-}
+        /* ===== Global Container ===== */
+        .stage {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
 
-/* ===== Password Screen ===== */
-#passwordScreen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(to bottom right, #1a001a, #000000);
-}
-#passwordScreen input { padding: 12px 20px; border-radius: 8px; border: none; font-size: 18px; margin-bottom: 10px; }
-#passwordScreen button { background: #ff4da6; color: white; border-radius: 12px; padding: 12px 25px; cursor: pointer; font-weight: bold; }
+        .stage.active {
+            opacity: 1;
+            visibility: visible;
+        }
 
-/* ===== Text ===== */
-h1 { font-size: 32px; text-shadow: 0 0 15px #ff4da6; margin: 20px; }
+        /* ===== Page 1: Password (Mysterious) ===== */
+        #page1 { background: radial-gradient(circle, #2b031a, #050002); z-index: 100; }
+        .lock-box {
+            text-align: center;
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-/* ===== Buttons ===== */
-button.nav, button.yea {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    margin: 15px;
-}
-button.nav { background: #ff4da6; color:white; }
-button.yea { background:#00ffb3; color:black; }
+        /* ===== Page 2: Floral Intro ===== */
+        #page2 { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('floral_bg1.jpg'); }
 
-/* ===== Image Frames Floating ===== */
-img.framed {
-    max-width: 60%;
-    max-height: 60%;
-    border-radius: 20px;
-    box-shadow: 0 0 25px rgba(255,77,166,0.8);
-    position: absolute;
-    animation: floaty 6s ease-in-out infinite alternate;
-}
+        /* ===== Page 3: The Gallery (Kyra Frames) ===== */
+        #page3 { background-color: #111; }
+        .gallery-wrap { position: relative; width: 100%; height: 80%; display: flex; justify-content: center; align-items: center; }
+        
+        .polaroid {
+            position: absolute;
+            background: white;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-radius: 2px;
+            transition: 0.5s;
+            max-width: 200px;
+        }
+        .polaroid img { width: 100%; height: 220px; object-fit: cover; }
+        
+        /* Floating logic for frames */
+        .f1 { transform: rotate(-5deg) translate(-100px, -50px); animation: float 4s ease-in-out infinite alternate; }
+        .f2 { transform: rotate(5deg) translate(100px, 30px); animation: float 5s ease-in-out infinite alternate-reverse; }
+        .f3 { transform: rotate(-2deg) translate(0, 100px); animation: float 6s ease-in-out infinite alternate; }
 
-/* Floating animation */
-@keyframes floaty {
-    0% { transform: translateY(0px) translateX(0px) rotate(0deg);}
-    50% { transform: translateY(-20px) translateX(15px) rotate(3deg);}
-    100% { transform: translateY(0px) translateX(-15px) rotate(-3deg);}
-}
+        @keyframes float { from { transform: translate(var(--tw), 0px) rotate(var(--tr)); } to { transform: translate(var(--tw), -20px) rotate(var(--tr)); } }
 
-/* ===== Hearts & Confetti ===== */
-.heart, .confetti {
-    position: absolute;
-    font-size: 24px;
-    animation: floatUp 6s linear forwards;
-}
-.confetti { font-size: 18px; }
+        /* ===== UI Elements ===== */
+        h1 { font-size: 2.5rem; text-shadow: 0 0 15px var(--hot-pink); margin-bottom: 20px; }
+        input { padding: 12px; border-radius: 10px; border: none; outline: none; margin-bottom: 10px; width: 220px; text-align: center;}
+        button { 
+            padding: 12px 30px; border-radius: 50px; border: none; cursor: pointer; 
+            font-weight: bold; transition: 0.3s;
+        }
+        .btn-pink { background: var(--hot-pink); color: white; }
+        .btn-mint { background: var(--mint); color: #000; font-size: 1.2rem; }
 
-@keyframes floatUp {
-    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-}
-</style>
+        /* ===== Particles ===== */
+        .heart, .confetti { position: absolute; pointer-events: none; z-index: 999; }
+    </style>
 </head>
 <body>
 
-<!-- ===== Password ===== -->
-<div id="passwordScreen">
-    <h2>Enter the secret code 😏</h2>
-    <input type="password" id="passInput" placeholder="Type the secret here">
-    <button onclick="checkPassword()">Enter & Play 🎵</button>
-    <p id="passMessage" style="color:#ff4da6;"></p>
-</div>
+    <section id="page1" class="stage active">
+        <div class="lock-box">
+            <h1>The Secret Code? 😏</h1>
+            <input type="password" id="passInput" placeholder="Hint: chickenwing">
+            <br>
+            <button class="btn-pink" onclick="startExperience()">Unlock & Play 🎵</button>
+        </div>
+    </section>
 
-<!-- ===== Pages ===== -->
-<div id="page1" class="page active" style="background:url('floral_bg1.jpg') center/cover no-repeat;">
-    <h1>Happy Valentine's Day 💐</h1>
-    <button class="nav" onclick="nextPage(2)">Next ➡️</button>
-</div>
+    <section id="page2" class="stage">
+        <div style="text-align: center;">
+            <h1>Happy Valentine's Day 💐</h1>
+            <button class="btn-pink" onclick="toPage(3)">See Something Pretty ➡️</button>
+        </div>
+    </section>
 
-<div id="page2" class="page" style="background:url('floral_bg2.jpg') center/cover no-repeat;">
-    <h1>Look at you 😎</h1>
-    <img src="kyra.png" class="framed" style="top:20%; left:10%;">
-    <button class="nav" onclick="nextPage(3)">Next ➡️</button>
-</div>
+    <section id="page3" class="stage">
+        <div class="gallery-wrap">
+            <div class="polaroid f1" style="--tw: -100px; --tr: -5deg;"><img src="kyra.png"></div>
+            <div class="polaroid f2" style="--tw: 100px; --tr: 5deg;"><img src="kyra2.png"></div>
+            <div class="polaroid f3" style="--tw: 0px; --tr: -2deg;"><img src="kyra3.png"></div>
+        </div>
+        <div style="position: absolute; bottom: 50px;">
+            <button class="btn-pink" onclick="toPage(4)">One More Thing ➡️</button>
+        </div>
+    </section>
 
-<div id="page3" class="page" style="background:url('floral_bg3.jpg') center/cover no-repeat;">
-    <h1>Still Stunning ✨</h1>
-    <img src="kyra2.png" class="framed" style="top:25%; left:50%;">
-    <img src="kyra3.png" class="framed" style="top:55%; left:20%;">
-    <button class="nav" onclick="nextPage(4)">Next ➡️</button>
-</div>
+    <section id="page4" class="stage" style="background-image: url('floral_bg2.jpg');">
+        <div class="lock-box">
+            <h1>Ready for the surprise? 🎉</h1>
+            <button class="btn-mint" onclick="finalCelebration()">Yea I do 😏</button>
+        </div>
+    </section>
 
-<div id="page4" class="page" style="background:url('floral_bg4.jpg') center/cover no-repeat;">
-    <h1>Beautiful Smile 😍</h1>
-    <img src="kyra4.jpg" class="framed" style="top:30%; left:40%;">
-    <button class="nav" onclick="nextPage(5)">Next ➡️</button>
-</div>
-
-<div id="page5" class="page" style="background:url('floral_bg5.jpg') center/cover no-repeat;">
-    <h1>Last Surprise 🎉</h1>
-    <button class="yea" onclick="playHappySong()">Yea I do 😏</button>
-</div>
-
-<!-- ===== Audio ===== -->
-<audio id="bgm" loop><source src="bgm.mp3" type="audio/mpeg"></audio>
-<audio id="happy"><source src="happy.mp3" type="audio/mpeg"></audio>
+    <audio id="bgm" loop><source src="bgm.mp3" type="audio/mpeg"></audio>
+    <audio id="happy"><source src="happy.mp3" type="audio/mpeg"></audio>
 
 <script>
-// ===== Variables =====
-const correctPassword = "chickenwing";
-let bgm = document.getElementById("bgm");
-let happy = document.getElementById("happy");
-let heartInterval;
+    const bgm = document.getElementById("bgm");
+    const happy = document.getElementById("happy");
 
-// ===== Password check =====
-function checkPassword(){
-    const input = document.getElementById("passInput").value;
-    const msg = document.getElementById("passMessage");
-    if(input === correctPassword){
-        document.getElementById("passwordScreen").style.display='none';
-        showPage(1);
-        bgm.currentTime=0; bgm.play().catch(()=>{});
-        spawnHearts();
-    } else msg.textContent="Wrong code 😏 Try again!";
-}
+    function startExperience() {
+        const pin = document.getElementById("passInput").value;
+        if(pin === "chickenwing") {
+            toPage(2);
+            bgm.play();
+            spawnLoop('💖', 15); // Start hearts
+        }
+    }
 
-// ===== Page navigation with fade =====
-function showPage(num){
-    document.querySelectorAll('.page').forEach(p=>{
-        p.classList.remove('active');
-    });
-    document.getElementById('page'+num).classList.add('active');
-}
+    function toPage(num) {
+        document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+        document.getElementById('page' + num).classList.add('active');
+        
+        // If moving to gallery, add a burst of confetti
+        if(num === 3) spawnBurst('✨', 20);
+    }
 
-function nextPage(num){ showPage(num); }
+    function spawnLoop(emoji, interval) {
+        setInterval(() => {
+            const el = document.createElement('div');
+            el.className = 'heart';
+            el.innerHTML = emoji;
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.top = '100vh';
+            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(el);
+            
+            el.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], { duration: 5000, easing: 'linear' });
 
-// ===== Floating Hearts =====
-function spawnHearts(){
-    heartInterval = setInterval(()=>{
-        const heart=document.createElement('div');
-        heart.className='heart';
-        heart.innerHTML='💖';
-        heart.style.left=Math.random()*100+'vw';
-        heart.style.fontSize=(16+Math.random()*24)+'px';
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),6000);
-    },500);
-}
+            setTimeout(() => el.remove(), 5000);
+        }, 600);
+    }
 
-// ===== Happy Song Trigger =====
-function playHappySong(){
-    // fade out bgm
-    let vol=bgm.volume;
-    const fade = setInterval(()=>{
-        vol -=0.02;
-        if(vol<=0){ bgm.pause(); clearInterval(fade); } else bgm.volume=vol;
-    },60);
+    function spawnBurst(emoji, count) {
+        for(let i=0; i<count; i++) {
+            const el = document.createElement('div');
+            el.innerHTML = emoji;
+            el.className = 'confetti';
+            el.style.left = '50vw';
+            el.style.top = '50vh';
+            document.body.appendChild(el);
 
-    happy.currentTime=0;
-    happy.play().catch(()=>{});
+            const destX = (Math.random() - 0.5) * 100;
+            const destY = (Math.random() - 0.5) * 100;
 
-    // extra confetti hearts
-    const extra=setInterval(()=>{
-        const c=document.createElement('div');
-        c.className='confetti';
-        c.innerHTML=['🎉','💖','✨'][Math.floor(Math.random()*3)];
-        c.style.left=Math.random()*100+'vw';
-        c.style.fontSize=(16+Math.random()*24)+'px';
-        document.body.appendChild(c);
-        setTimeout(()=>c.remove(),5000);
-    },200);
+            el.animate([
+                { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                { transform: `translate(${destX}vw, ${destY}vh) scale(0)`, opacity: 0 }
+            ], { duration: 2000, easing: 'ease-out' });
 
-    setTimeout(()=>clearInterval(extra),5000);
-}
+            setTimeout(() => el.remove(), 2000);
+        }
+    }
+
+    function finalCelebration() {
+        // 1. Fade out BGM
+        const fade = setInterval(() => {
+            if(bgm.volume > 0.1) bgm.volume -= 0.1;
+            else { bgm.pause(); clearInterval(fade); }
+        }, 150);
+
+        // 2. Play Happy
+        happy.play();
+
+        // 3. Crazy confetti
+        const party = setInterval(() => {
+            spawnBurst('🎉', 5);
+            spawnBurst('🌸', 5);
+        }, 300);
+        
+        setTimeout(() => clearInterval(party), 5000);
+    }
 </script>
 </body>
 </html>
