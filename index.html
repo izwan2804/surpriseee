@@ -3,128 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyra Karissa 🌸</title>
+    <title>For Kyra Karissa 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --soft-pink: #ffb7c5;
-            --hot-pink: #ff4da6;
-            --mint: #00ffb3;
-            --glass: rgba(255, 255, 255, 0.15);
+            --pink: #ff4da6;
+            --soft-cream: #fff5f7;
+            --accent: #00ffb3;
+            --text-dark: #333;
         }
+
+        * { box-sizing: border-box; }
 
         body, html {
             margin: 0; padding: 0;
             height: 100%; width: 100%;
-            background: #0e0108;
-            font-family: 'Arial', sans-serif;
-            color: white;
+            background: #0f0008;
+            font-family: 'Poppins', sans-serif;
+            color: var(--soft-cream);
             overflow: hidden;
         }
 
-        /* ===== Global Container ===== */
+        /* ===== Cinematic Background ===== */
+        .bg-layer {
+            position: fixed;
+            inset: -50px;
+            background: linear-gradient(rgba(15,0,8,0.7), rgba(15,0,8,0.7)), url('floral_bg1.jpg') center/cover;
+            filter: blur(8px);
+            z-index: -1;
+            transition: all 1s ease-in-out;
+            transform: scale(1.0); /* Initial scale for parallax */
+        }
+
+        /* Parallax effect on hover */
+        body:hover .bg-layer { transform: scale(1.05); }
+
+        /* ===== Page Transitions ===== */
         .stage {
             position: absolute;
             inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .stage.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        /* ===== Typography ===== */
+        h1 { font-family: 'Dancing Script', cursive; font-size: clamp(2.5rem, 8vw, 4rem); color: var(--pink); margin: 10px 0; }
+        p.sub-text { font-weight: 300; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; opacity: 0.8; }
+
+        /* ===== Photo Gallery Layers ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transform: scale(0) rotate(var(--r));
+            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden; /* For caption */
+        }
+
+        .stage.active .polaroid { transform: scale(1) rotate(var(--r)); }
+
+        .polaroid img { width: 130px; height: 160px; object-fit: cover; }
+        .polaroid::after {
+            content: var(--caption);
+            font-family: 'Dancing Script', cursive;
+            color: var(--text-dark);
+            position: absolute;
+            bottom: 10px; left: 0; width: 100%;
+            font-size: 1.2rem;
+        }
+
+        /* ===== Inputs & Buttons ===== */
+        .glass-ui {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+
+        input {
+            background: transparent; border: 2px solid var(--pink);
+            border-radius: 15px; color: var(--soft-cream); padding: 15px;
+            width: 250px; text-align: center; font-size: 1rem; margin: 20px 0;
+        }
+
+        button {
+            background: var(--pink); color: white; border: none;
+            padding: 15px 40px; border-radius: 30px; font-weight: bold;
+            cursor: pointer; transition: 0.3s; text-transform: uppercase;
+        }
+        button:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 20px rgba(255,77,166,0.4); }
+
+        /* ===== Floating Text Particles ===== */
+        .floating-word {
+            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            color: rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+        }
+
+        /* ===== The Love Letter Finale ===== */
+        #loveLetter {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.8s ease-in-out;
-            background-size: cover;
-            background-position: center;
+            transition: opacity 2s ease-in-out;
+            z-index: 100;
         }
 
-        .stage.active {
+        #loveLetter.active {
             opacity: 1;
             visibility: visible;
         }
 
-        /* ===== Page 1: Password (Mysterious) ===== */
-        #page1 { background: radial-gradient(circle, #2b031a, #050002); z-index: 100; }
-        .lock-box {
+        .letter-content {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            line-height: 1.8;
+            color: var(--soft-cream);
             text-align: center;
-            background: var(--glass);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* ===== Page 2: Floral Intro ===== */
-        #page2 { background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('floral_bg1.jpg'); }
-
-        /* ===== Page 3: The Gallery (Kyra Frames) ===== */
-        #page3 { background-color: #111; }
-        .gallery-wrap { position: relative; width: 100%; height: 80%; display: flex; justify-content: center; align-items: center; }
-        
-        .polaroid {
+            max-width: 800px;
+            padding: 50px;
             position: absolute;
-            background: white;
-            padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border-radius: 2px;
-            transition: 0.5s;
-            max-width: 200px;
+            animation: scrollLetter 30s linear forwards; /* Adjust duration for letter length */
+            white-space: pre-wrap;
         }
-        .polaroid img { width: 100%; height: 220px; object-fit: cover; }
-        
-        /* Floating logic for frames */
-        .f1 { transform: rotate(-5deg) translate(-100px, -50px); animation: float 4s ease-in-out infinite alternate; }
-        .f2 { transform: rotate(5deg) translate(100px, 30px); animation: float 5s ease-in-out infinite alternate-reverse; }
-        .f3 { transform: rotate(-2deg) translate(0, 100px); animation: float 6s ease-in-out infinite alternate; }
 
-        @keyframes float { from { transform: translate(var(--tw), 0px) rotate(var(--tr)); } to { transform: translate(var(--tw), -20px) rotate(var(--tr)); } }
-
-        /* ===== UI Elements ===== */
-        h1 { font-size: 2.5rem; text-shadow: 0 0 15px var(--hot-pink); margin-bottom: 20px; }
-        input { padding: 12px; border-radius: 10px; border: none; outline: none; margin-bottom: 10px; width: 220px; text-align: center;}
-        button { 
-            padding: 12px 30px; border-radius: 50px; border: none; cursor: pointer; 
-            font-weight: bold; transition: 0.3s;
+        @keyframes scrollLetter {
+            0% { transform: translateY(100vh); opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
         }
-        .btn-pink { background: var(--hot-pink); color: white; }
-        .btn-mint { background: var(--mint); color: #000; font-size: 1.2rem; }
 
-        /* ===== Particles ===== */
-        .heart, .confetti { position: absolute; pointer-events: none; z-index: 999; }
+        .letter-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--pink);
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
 
+    <div class="bg-layer" id="bgLayer"></div>
+
     <section id="page1" class="stage active">
-        <div class="lock-box">
-            <h1>The Secret Code? 😏</h1>
-            <input type="password" id="passInput" placeholder="Hint: chickenwing">
+        <div class="glass-ui">
+            <p class="sub-text">Private Access</p>
+            <h1>Hey Kyra...</h1>
+            <input type="password" id="passInput" placeholder="Favorite food? 😏">
             <br>
-            <button class="btn-pink" onclick="startExperience()">Unlock & Play 🎵</button>
+            <button onclick="checkPass()">Unlock Memories 🌸</button>
         </div>
     </section>
 
     <section id="page2" class="stage">
-        <div style="text-align: center;">
-            <h1>Happy Valentine's Day 💐</h1>
-            <button class="btn-pink" onclick="toPage(3)">See Something Pretty ➡️</button>
+        <p class="sub-text">February 14, 2026</p>
+        <h1>To the most beautiful.</h1>
+        
+        <div class="gallery">
+            <div class="polaroid" style="--r:-5deg; --caption:'Your Smile';" data-delay="0.2"><img src="kyra.png"></div>
+            <div class="polaroid" style="--r:4deg; --caption:'Your Spirit';" data-delay="0.4"><img src="kyra2.png"></div>
+            <div class="polaroid" style="--r:-3deg; --caption:'My World';" data-delay="0.6"><img src="kyra3.png"></div>
+            <div class="polaroid" style="--r:6deg; --caption:'Always & Forever ✨';" data-delay="0.8"><img src="kyra4.jpg"></div>
         </div>
+
+        <button onclick="go(3)">Keep Smiling ➡️</button>
     </section>
 
     <section id="page3" class="stage">
-        <div class="gallery-wrap">
-            <div class="polaroid f1" style="--tw: -100px; --tr: -5deg;"><img src="kyra.png"></div>
-            <div class="polaroid f2" style="--tw: 100px; --tr: 5deg;"><img src="kyra2.png"></div>
-            <div class="polaroid f3" style="--tw: 0px; --tr: -2deg;"><img src="kyra3.png"></div>
-        </div>
-        <div style="position: absolute; bottom: 50px;">
-            <button class="btn-pink" onclick="toPage(4)">One More Thing ➡️</button>
+        <div class="glass-ui">
+            <h1>One Last Question...</h1>
+            <p style="margin-bottom: 20px; font-style: italic;">Will you celebrate this vibe with me?</p>
+            <button style="background: var(--accent); color: black;" onclick="finish()">Yea I do 😏</button>
         </div>
     </section>
 
-    <section id="page4" class="stage" style="background-image: url('floral_bg2.jpg');">
-        <div class="lock-box">
-            <h1>Ready for the surprise? 🎉</h1>
-            <button class="btn-mint" onclick="finalCelebration()">Yea I do 😏</button>
+    <div id="loveLetter">
+        <div class="letter-content" id="letterText">
+            My Dearest Kyra,
+            
+            From the moment I first saw you, I knew my world had changed. Every day with you is a gift, a beautiful adventure filled with laughter, joy, and a love deeper than I ever imagined.
+
+            You light up every room you enter, not just with your stunning beauty, but with your incredible spirit, kindness, and that infectious smile. You inspire me, challenge me, and make me want to be a better person.
+
+            Thank you for being you. Thank you for every memory we've made, and for all the wonderful moments yet to come. You are truly one of a kind, and I cherish every single second we spend together.
+
+            Happy Valentine's Day, my love. Today, tomorrow, and always, you have my whole heart.
+
+            <div class="letter-signature">
+                With all my love,
+                [Your Name Here]
+            </div>
         </div>
-    </section>
+    </div>
 
     <audio id="bgm" loop><source src="bgm.mp3" type="audio/mpeg"></audio>
     <audio id="happy"><source src="happy.mp3" type="audio/mpeg"></audio>
@@ -132,81 +235,89 @@
 <script>
     const bgm = document.getElementById("bgm");
     const happy = document.getElementById("happy");
+    const bgLayer = document.getElementById("bgLayer");
+    const loveLetter = document.getElementById("loveLetter");
 
-    function startExperience() {
-        const pin = document.getElementById("passInput").value;
-        if(pin === "chickenwing") {
-            toPage(2);
-            bgm.play();
-            spawnLoop('💖', 15); // Start hearts
+    // Parallax Effect (subtler for a more elegant feel)
+    document.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 15;
+        const y = (e.clientY / window.innerHeight - 0.5) * 15;
+        bgLayer.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+    });
+
+    function checkPass() {
+        if(document.getElementById("passInput").value.toLowerCase() === "chickenwing") {
+            bgm.play().catch(e => console.log("Audio play failed, user interaction needed."));
+            go(2);
+            startFloatingWords();
+        } else {
+            alert("Wrong food! Try again lol 🍗");
         }
     }
 
-    function toPage(num) {
+    function go(num) {
         document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
         document.getElementById('page' + num).classList.add('active');
         
-        // If moving to gallery, add a burst of confetti
-        if(num === 3) spawnBurst('✨', 20);
+        // Background changes
+        if(num === 2) bgLayer.style.backgroundImage = "linear-gradient(rgba(15,0,8,0.6), rgba(15,0,8,0.6)), url('floral_bg1.jpg')";
+        if(num === 3) bgLayer.style.backgroundImage = "linear-gradient(rgba(15,0,8,0.6), rgba(15,0,8,0.6)), url('floral_bg2.jpg')";
     }
 
-    function spawnLoop(emoji, interval) {
+    function startFloatingWords() {
+        const words = ["Love", "Joy", "Kyra", "Forever", "Heart", "Soulmate", "Mine"];
         setInterval(() => {
-            const el = document.createElement('div');
-            el.className = 'heart';
-            el.innerHTML = emoji;
-            el.style.left = Math.random() * 100 + 'vw';
-            el.style.top = '100vh';
-            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
-            document.body.appendChild(el);
-            
-            el.animate([
-                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                { transform: `translateY(-110vh) rotate(${Math.random() * 360}deg)`, opacity: 0 }
-            ], { duration: 5000, easing: 'linear' });
+            const w = document.createElement('div');
+            w.className = 'floating-word';
+            w.innerHTML = words[Math.floor(Math.random()*words.length)];
+            w.style.left = Math.random() * 80 + 10 + 'vw';
+            w.style.top = '110vh';
+            w.style.fontSize = (Math.random() * 20 + 30) + 'px';
+            document.body.appendChild(w);
 
-            setTimeout(() => el.remove(), 5000);
-        }, 600);
+            w.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 0 },
+                { transform: 'translateY(-50vh) rotate(10deg)', opacity: 0.3 },
+                { transform: 'translateY(-110vh) rotate(-10deg)', opacity: 0 }
+            ], { duration: 8000, easing: 'linear' });
+
+            setTimeout(() => w.remove(), 8000);
+        }, 1500);
     }
 
-    function spawnBurst(emoji, count) {
-        for(let i=0; i<count; i++) {
-            const el = document.createElement('div');
-            el.innerHTML = emoji;
-            el.className = 'confetti';
-            el.style.left = '50vw';
-            el.style.top = '50vh';
-            document.body.appendChild(el);
-
-            const destX = (Math.random() - 0.5) * 100;
-            const destY = (Math.random() - 0.5) * 100;
-
-            el.animate([
-                { transform: 'translate(0,0) scale(1)', opacity: 1 },
-                { transform: `translate(${destX}vw, ${destY}vh) scale(0)`, opacity: 0 }
-            ], { duration: 2000, easing: 'ease-out' });
-
-            setTimeout(() => el.remove(), 2000);
-        }
-    }
-
-    function finalCelebration() {
-        // 1. Fade out BGM
+    function finish() {
+        let vol = 1.0;
         const fade = setInterval(() => {
-            if(bgm.volume > 0.1) bgm.volume -= 0.1;
+            if(vol > 0.05) { vol -= 0.05; bgm.volume = vol; }
             else { bgm.pause(); clearInterval(fade); }
         }, 150);
 
-        // 2. Play Happy
         happy.play();
-
-        // 3. Crazy confetti
-        const party = setInterval(() => {
-            spawnBurst('🎉', 5);
-            spawnBurst('🌸', 5);
-        }, 300);
         
-        setTimeout(() => clearInterval(party), 5000);
+        // Celebration Burst
+        for(let i=0; i<50; i++) {
+            setTimeout(() => {
+                const p = document.createElement('div');
+                p.style.position = 'absolute';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = Math.random() * 100 + 'vh';
+                p.innerHTML = ['💖', '🌸', '✨', '🔥'][Math.floor(Math.random()*4)];
+                p.style.fontSize = '30px';
+                document.body.appendChild(p);
+                p.animate([{transform:'scale(0)', opacity:1}, {transform:'scale(3)', opacity:0}], 2000);
+                setTimeout(() => p.remove(), 2000);
+            }, i * 100);
+        }
+
+        // --- Show the Love Letter after the burst ---
+        setTimeout(() => {
+            document.querySelectorAll('.stage').forEach(s => s.classList.remove('active')); // Hide all stages
+            loveLetter.classList.add('active'); // Show letter
+            happy.pause(); // Pause happy song
+            bgm.currentTime = 0;
+            bgm.play(); // Restart BGM for ambient letter reading
+            bgm.volume = 0.5; // Lower BGM for reading
+        }, 50 * 100 + 2000); // Wait for all confetti to finish
     }
 </script>
 </body>
