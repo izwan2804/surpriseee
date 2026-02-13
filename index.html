@@ -104,7 +104,7 @@ button.no {
 <div id="passwordScreen">
     <h2>Enter the secret code 😏</h2>
     <input type="password" id="passInput" placeholder="Type the secret here">
-    <button onclick="checkPassword()">Enter & Play 🎵</button>
+    <button onclick="checkPasswordAndPlay()">Enter & Play 🎵</button>
     <p id="passMessage" style="color:#ff4da6;"></p>
 </div>
 
@@ -127,32 +127,37 @@ button.no {
 <script>
 // ===== Password logic =====
 const correctPassword = "chickenwing";
-function checkPassword(){
+let audio = document.getElementById("bgmusic");
+let volume = 0;
+audio.volume = 0;
+
+// ===== Password submit with direct audio play for mobile =====
+function checkPasswordAndPlay(){
     const input = document.getElementById("passInput").value;
     const msg = document.getElementById("passMessage");
+
     if(input === correctPassword){
         document.getElementById("passwordScreen").style.display = "none";
         document.querySelector(".content").style.display = "block";
+
+        // Direct play on user click for mobile
+        audio.currentTime = 0;
+        audio.play().catch(()=>{});
+
         startSurprise();
     } else {
         msg.textContent = "Wrong code 😏 Try again!";
     }
 }
 
-// ===== Valentine page logic =====
-let audio = document.getElementById("bgmusic");
-let volume = 0;
-audio.volume = 0;
-
 // ===== Start Surprise =====
 function startSurprise(){
-    audio.play().catch(()=>{}); // ensures mobile play after click
     fadeInMusic();
     typeWriter();
 }
 
 // ===== Typewriter Message =====
-const text = "Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\n\nKeep looking hella pretty aitee. ";
+const text = "Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\n\nKeep looking hella pretty aitee.\n\nAnd am so sorry please forgive me.";
 let i = 0;
 function typeWriter(){
     if(i < text.length){
@@ -188,8 +193,8 @@ function fadeInMusic(){
 // ===== Happy Song on "Yea I do" =====
 function playHappySong(){
     audio.currentTime = 0;
-    audio.play().catch(()=>{});
-    
+    audio.play().catch(()=>{}); // direct click triggers audio
+
     // extra heart celebration for 5 seconds
     const heartInterval = setInterval(createHeart, 250); 
     setTimeout(()=> clearInterval(heartInterval), 5000);
@@ -206,4 +211,3 @@ noBtn.addEventListener("mouseover", function(){
 
 </body>
 </html>
-
