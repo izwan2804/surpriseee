@@ -2,154 +2,177 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Kyra Karissa 😎</title>
+<title>Kyra Karissa Surprise 😎</title>
 <style>
-/* ===== Global Styles ===== */
+/* ===== Global CSS ===== */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Arial', sans-serif;
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 /* ===== Password Screen ===== */
 #passwordScreen {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at top, #1a001a, #000000);
+    background: linear-gradient(135deg, #1a001a, #330033);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     z-index: 10;
     text-align: center;
-}
-
-#passwordScreen h2 {
-    font-size: 28px;
-    text-shadow: 0 0 10px #ff4da6;
 }
 
 #passwordScreen input {
     padding: 12px 20px;
     font-size: 18px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: none;
-    margin: 15px 0;
+    margin-bottom: 12px;
 }
 
 #passwordScreen button {
-    padding: 12px 25px;
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 10px;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
     background: #ff4da6;
     color: white;
-    box-shadow: 0 0 15px #ff4da6;
-    transition: 0.3s;
-}
-#passwordScreen button:hover {
-    transform: scale(1.1);
+    font-weight: bold;
+    cursor: pointer;
 }
 
-/* Floating petals for password screen */
-.petal {
-    position: absolute;
-    font-size: 20px;
-    animation: fall 8s linear forwards;
-    opacity: 0.8;
-}
-@keyframes fall {
-    0% {transform: translateY(-50px) rotate(0deg);}
-    100% {transform: translateY(110vh) rotate(360deg);}
-}
-
-/* ===== Main Content ===== */
-.content {
-    position: absolute;
+/* ===== Pages ===== */
+.page {
+    display: none;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, #330033, #000000);
-    display: none;
-    flex-direction: column;
+    position: fixed;
+    top:0;
+    left:0;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     text-align: center;
 }
 
-.content img {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    border: 8px solid #ff4da6;
-    box-shadow: 0 0 25px #ff4da6;
-    transition: transform 0.5s;
+/* ===== Greeting Page ===== */
+#greetingPage {
+    background: url('floral_bg1.jpg') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
-.content img.pulse {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% {transform: scale(1);}
-    50% {transform: scale(1.08);}
-    100% {transform: scale(1);}
-}
-
-h1 {
+#greetingPage h1 {
     font-size: 36px;
     text-shadow: 0 0 15px #ff4da6;
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #message {
-    font-size: 18px;
+    font-size: 20px;
     width: 80%;
-    margin: 20px auto;
+    margin: 0 auto;
     line-height: 1.5;
 }
 
-/* Buttons */
-button.cool {
+/* ===== Gallery Page ===== */
+#galleryPage {
+    background: url('floral_bg2.jpg') center/cover no-repeat;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    gap: 25px;
+}
+
+.gallery-item {
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 6px solid #ff4da6;
+    box-shadow: 0 0 20px rgba(255,77,166,0.7);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gallery-item:hover {
+    transform: scale(1.1) rotate(-2deg);
+    cursor: pointer;
+}
+
+/* ===== Finale Page ===== */
+#finalePage {
+    background: url('floral_bg3.jpg') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#finalePage h1 {
+    font-size: 40px;
+    text-shadow: 0 0 20px #ff4da6;
+    margin-bottom: 20px;
+}
+
+#finalePage button {
+    padding: 12px 30px;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
     background: #ff4da6;
     color: white;
-    margin: 10px;
-    padding: 12px 25px;
-    border-radius: 8px;
-    border: none;
     font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 15px #ff4da6;
-    transition: 0.3s;
-}
-button.cool:hover {transform: scale(1.1);}
-
-button.no {
-    background: gray;
-    color: white;
-    margin: 10px;
-    padding: 12px 25px;
-    border-radius: 8px;
-    position: relative;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
 }
 
-/* Floating hearts and petals */
-.heart, .petalMain {
+/* ===== Floating Hearts ===== */
+.heart {
     position: absolute;
-    font-size: 18px;
-    animation: floatMain 6s linear forwards;
+    bottom: -20px;
+    font-size: 22px;
+    animation: float 6s linear forwards;
+    pointer-events: none;
 }
 
-@keyframes floatMain {
-    0% {transform: translateY(0); opacity: 1;}
-    100% {transform: translateY(-100vh); opacity: 0;}
+@keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    50% { transform: translateY(-50vh) scale(1.1); }
+    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+}
+
+/* ===== Confetti ===== */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ff4da6;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: confettiFall linear forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); opacity:1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
 }
 </style>
 </head>
@@ -158,71 +181,82 @@ button.no {
 <!-- ===== Password Screen ===== -->
 <div id="passwordScreen">
     <h2>Enter the secret code 😏</h2>
-    <input type="password" id="passInput" placeholder="Type the secret here">
-    <button onclick="checkPassword()">Enter & Play 🎵</button>
+    <input type="password" id="passInput" placeholder="Type here">
+    <button onclick="checkPassword()">Enter 🎵</button>
     <p id="passMessage" style="color:#ff4da6;"></p>
 </div>
 
-<!-- ===== Main Content ===== -->
-<div class="content">
-    <img src="kyra.jpg" id="kyraImg" alt="Kyra Karissa">
-    <h1>Happy Valentine's Day, Kyra Karissa 💐</h1>
+<!-- ===== Greeting Page ===== -->
+<div id="greetingPage" class="page">
+    <h1>Happy Valentine’s Day, Kyra Karissa 💐</h1>
     <p id="message"></p>
+</div>
 
-    <div class="buttons">
-        <button class="cool" onclick="playHappySong()">Yea I do 😏</button>
-        <button class="no" id="noBtn">Nope I don’t 🙄</button>
-    </div>
+<!-- ===== Gallery Page ===== -->
+<div id="galleryPage" class="page">
+    <div class="gallery-item"><img src="kyra.png" alt="Kyra 1"></div>
+    <div class="gallery-item"><img src="kyra2.png" alt="Kyra 2"></div>
+    <div class="gallery-item"><img src="kyra3.png" alt="Kyra 3"></div>
+    <div class="gallery-item"><img src="kyra4.jpg" alt="Kyra 4"></div>
+    <button onclick="goFinale()">Next 🎉</button>
+</div>
+
+<!-- ===== Finale Page ===== -->
+<div id="finalePage" class="page">
+    <h1>Will you cheer with me? 😏</h1>
+    <button onclick="playHappySong()">Yea I do 😍</button>
 </div>
 
 <!-- ===== Audio ===== -->
 <audio id="bgmusic" loop>
     <source src="bgm.mp3" type="audio/mpeg">
 </audio>
-<audio id="happyAudio">
+
+<audio id="happySong">
     <source src="happy.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 // ===== Password logic =====
 const correctPassword = "chickenwing";
-const audio = document.getElementById("bgmusic");
-const happyAudio = document.getElementById("happyAudio");
+let audio = document.getElementById("bgmusic");
+let happyAudio = document.getElementById("happySong");
 let volume = 0;
 
-function checkPassword() {
+function checkPassword(){
     const input = document.getElementById("passInput").value;
     const msg = document.getElementById("passMessage");
     if(input === correctPassword){
         document.getElementById("passwordScreen").style.display = "none";
-        document.querySelector(".content").style.display = "flex";
-
-        // Play bgm on mobile-friendly user click
-        audio.currentTime = 0;
-        audio.play().catch(()=>{});
-
-        startSurprise();
+        document.getElementById("greetingPage").style.display = "flex";
+        startGreeting();
     } else {
         msg.textContent = "Wrong code 😏 Try again!";
     }
 }
 
-// ===== Stage 2: Valentine page =====
-const text = "Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\n\nKeep looking hella pretty aitee.\n\nAnd am so sorry please forgive me.";
+// ===== Typewriter =====
+const text = "Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\nKeep looking hella pretty aitee.\nAnd am so sorry please forgive me.";
 let i = 0;
-
-function startSurprise(){
-    fadeInMusic();
-    typeWriter();
-    startPetals();
-}
-
 function typeWriter(){
     if(i < text.length){
         document.getElementById("message").innerHTML += text.charAt(i);
         i++;
         setTimeout(typeWriter, 40);
     }
+}
+
+// ===== Start Greeting =====
+function startGreeting(){
+    audio.currentTime = 0;
+    audio.play().catch(()=>{});
+    fadeInMusic();
+    typeWriter();
+    // move to gallery after 7 seconds
+    setTimeout(()=>{
+        document.getElementById("greetingPage").style.display = "none";
+        document.getElementById("galleryPage").style.display = "flex";
+    }, 7000);
 }
 
 // ===== Floating Hearts =====
@@ -234,19 +268,7 @@ function createHeart(){
     document.body.appendChild(heart);
     setTimeout(()=>{ heart.remove(); },6000);
 }
-setInterval(createHeart, 500);
-
-// ===== Floating petals =====
-function createPetal(){
-    const petal = document.createElement("div");
-    petal.classList.add("petalMain");
-    petal.innerHTML = "🌸";
-    petal.style.left = Math.random()*100 + "vw";
-    petal.style.fontSize = (15 + Math.random()*15) + "px";
-    document.body.appendChild(petal);
-    setTimeout(()=>{ petal.remove(); },8000);
-}
-function startPetals(){ setInterval(createPetal, 700); }
+setInterval(createHeart, 600);
 
 // ===== Fade-in Music =====
 function fadeInMusic(){
@@ -260,32 +282,52 @@ function fadeInMusic(){
     }, 60);
 }
 
-// ===== Happy Song =====
+// ===== Go to Finale =====
+function goFinale(){
+    document.getElementById("galleryPage").style.display = "none";
+    document.getElementById("finalePage").style.display = "flex";
+}
+
+// ===== Play Happy Song =====
 function playHappySong(){
+    // Fade out bgm
+    let fadeInterval = setInterval(()=>{
+        if(audio.volume > 0){
+            audio.volume -= 0.02;
+        } else {
+            audio.pause();
+            audio.volume = 0.5;
+            clearInterval(fadeInterval);
+        }
+    }, 100);
+
     happyAudio.currentTime = 0;
     happyAudio.play().catch(()=>{});
 
-    // pulse kyra image
-    const kyra = document.getElementById("kyraImg");
-    kyra.classList.add("pulse");
-    setTimeout(()=>{ kyra.classList.remove("pulse"); }, 5000);
-
-    // extra hearts and petals
-    const heartInt = setInterval(createHeart, 200);
-    const petalInt = setInterval(createPetal, 300);
-    setTimeout(()=>{
-        clearInterval(heartInt);
-        clearInterval(petalInt);
-    }, 5000);
+    // confetti for 5 seconds
+    const confettiInterval = setInterval(createConfetti, 100);
+    setTimeout(()=> clearInterval(confettiInterval), 5000);
 }
 
-// ===== Runaway "Nope" button =====
+// ===== Confetti =====
+function createConfetti(){
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+    confetti.style.left = Math.random()*window.innerWidth + "px";
+    confetti.style.backgroundColor = `hsl(${Math.random()*360}, 80%, 60%)`;
+    confetti.style.width = confetti.style.height = Math.random()*8+4 + "px";
+    document.body.appendChild(confetti);
+    setTimeout(()=> confetti.remove(), 3000);
+}
+
+// ===== Runaway "Nope" Button =====
 const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover", function(){
+noBtn?.addEventListener("mouseover", ()=>{
     noBtn.style.position = "absolute";
     noBtn.style.left = Math.random()*window.innerWidth + "px";
     noBtn.style.top = Math.random()*window.innerHeight + "px";
 });
 </script>
+
 </body>
 </html>
