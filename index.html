@@ -18,6 +18,7 @@ body {
 .content {
     position: relative;
     top: 30%;
+    display: none; /* Hide content until password correct */
 }
 
 h1 {
@@ -32,7 +33,7 @@ h1 {
     line-height: 1.5;
 }
 
-.popup {
+.popup, #passwordScreen {
     position: fixed;
     width: 100%;
     height: 100%;
@@ -42,6 +43,14 @@ h1 {
     align-items: center;
     flex-direction: column;
     z-index: 5;
+}
+
+input[type="password"] {
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 10px;
 }
 
 button {
@@ -79,10 +88,12 @@ button {
 </head>
 <body>
 
-<!-- ===== Popup ===== -->
-<div class="popup" id="popup">
-    <h2>⚠️ Warning</h2>
-    <button onclick="startSurprise()">Proceed 😎</button>
+<!-- ===== Password Screen ===== -->
+<div id="passwordScreen">
+    <h2>Enter the secret code 😏</h2>
+    <input type="password" id="passInput" placeholder="Type the secret here">
+    <button onclick="checkPassword()">Enter</button>
+    <p id="passMessage" style="color:#ff4da6;"></p>
 </div>
 
 <!-- ===== Main Content ===== -->
@@ -101,25 +112,36 @@ button {
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bdb9f6f0f.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ===== JS ===== -->
 <script>
-// ===== Variables =====
+// ===== Password logic =====
+const correctPassword = "chickenwing"; // the password
+function checkPassword(){
+    const input = document.getElementById("passInput").value;
+    const msg = document.getElementById("passMessage");
+    if(input === correctPassword){
+        document.getElementById("passwordScreen").style.display = "none";
+        document.querySelector(".content").style.display = "block";
+        startSurprise();
+    } else {
+        msg.textContent = "Wrong code 😏 Try again!";
+    }
+}
+
+// ===== Valentine page logic =====
 let audio = document.getElementById("bgmusic");
 let volume = 0;
 audio.volume = 0;
 
 // ===== Start Surprise =====
 function startSurprise(){
-    document.getElementById("popup").style.display = "none";
     audio.play();
     fadeInMusic();
     typeWriter();
 }
 
 // ===== Typewriter Message =====
-const text = "Dear Kyra Karissa,Happy Valentine’s Day Cantiks😏\n\n Keep look hella pretty aitee." ";
+const text = "Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\n\nKeep looking hella pretty aitee.";
 let i = 0;
-
 function typeWriter(){
     if(i < text.length){
         document.getElementById("message").innerHTML += text.charAt(i);
@@ -137,8 +159,6 @@ function createHeart(){
     document.body.appendChild(heart);
     setTimeout(()=>{ heart.remove(); },6000);
 }
-
-// Hearts appear 2 per second
 setInterval(createHeart, 500);
 
 // ===== Fade-in Music =====
