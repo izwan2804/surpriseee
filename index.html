@@ -2,332 +2,209 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Kyra Karissa Surprise 😎</title>
+<title>Kyra Karissa 😎</title>
 <style>
-/* ===== Global CSS ===== */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Arial', sans-serif;
-    color: white;
     overflow-x: hidden;
-    overflow-y: hidden;
+    background: #000;
+}
+
+/* ===== Page Containers ===== */
+.page {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top:0; left:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow: hidden;
+}
+
+/* ===== Active Page ===== */
+.page.active {
+    opacity: 1;
+    z-index: 1;
 }
 
 /* ===== Password Screen ===== */
 #passwordScreen {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #1a001a, #330033);
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    z-index: 10;
-    text-align: center;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #1a001a, #000000);
 }
+#passwordScreen input { padding: 12px 20px; border-radius: 8px; border: none; font-size: 18px; margin-bottom: 10px; }
+#passwordScreen button { background: #ff4da6; color: white; border-radius: 12px; padding: 12px 25px; cursor: pointer; font-weight: bold; }
 
-#passwordScreen input {
-    padding: 12px 20px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: none;
-    margin-bottom: 12px;
-}
+/* ===== Text ===== */
+h1 { font-size: 32px; text-shadow: 0 0 15px #ff4da6; margin: 20px; }
 
-#passwordScreen button {
-    padding: 12px 30px;
-    font-size: 18px;
-    border-radius: 10px;
+/* ===== Buttons ===== */
+button.nav, button.yea {
+    padding: 12px 25px;
     border: none;
-    background: #ff4da6;
-    color: white;
-    font-weight: bold;
+    border-radius: 12px;
     cursor: pointer;
+    font-weight: bold;
+    margin: 15px;
 }
+button.nav { background: #ff4da6; color:white; }
+button.yea { background:#00ffb3; color:black; }
 
-/* ===== Pages ===== */
-.page {
-    display: none;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top:0;
-    left:0;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-}
-
-/* ===== Greeting Page ===== */
-#greetingPage {
-    background: url('floral_bg1.jpg') center/cover no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-#greetingPage h1 {
-    font-size: 36px;
-    text-shadow: 0 0 15px #ff4da6;
-    margin-bottom: 20px;
-}
-
-#message {
-    font-size: 20px;
-    width: 80%;
-    margin: 0 auto;
-    line-height: 1.5;
-}
-
-/* ===== Gallery Page ===== */
-#galleryPage {
-    background: url('floral_bg2.jpg') center/cover no-repeat;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    gap: 25px;
-}
-
-.gallery-item {
-    width: 180px;
-    height: 180px;
-    overflow: hidden;
+/* ===== Image Frames Floating ===== */
+img.framed {
+    max-width: 60%;
+    max-height: 60%;
     border-radius: 20px;
-    border: 6px solid #ff4da6;
-    box-shadow: 0 0 20px rgba(255,77,166,0.7);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.gallery-item:hover {
-    transform: scale(1.1) rotate(-2deg);
-    cursor: pointer;
-}
-
-/* ===== Finale Page ===== */
-#finalePage {
-    background: url('floral_bg3.jpg') center/cover no-repeat;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-#finalePage h1 {
-    font-size: 40px;
-    text-shadow: 0 0 20px #ff4da6;
-    margin-bottom: 20px;
-}
-
-#finalePage button {
-    padding: 12px 30px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background: #ff4da6;
-    color: white;
-    font-weight: bold;
-}
-
-/* ===== Floating Hearts ===== */
-.heart {
+    box-shadow: 0 0 25px rgba(255,77,166,0.8);
     position: absolute;
-    bottom: -20px;
-    font-size: 22px;
-    animation: float 6s linear forwards;
-    pointer-events: none;
+    animation: floaty 6s ease-in-out infinite alternate;
 }
 
-@keyframes float {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    50% { transform: translateY(-50vh) scale(1.1); }
-    100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+/* Floating animation */
+@keyframes floaty {
+    0% { transform: translateY(0px) translateX(0px) rotate(0deg);}
+    50% { transform: translateY(-20px) translateX(15px) rotate(3deg);}
+    100% { transform: translateY(0px) translateX(-15px) rotate(-3deg);}
 }
 
-/* ===== Confetti ===== */
-.confetti {
+/* ===== Hearts & Confetti ===== */
+.heart, .confetti {
     position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #ff4da6;
-    opacity: 0.8;
-    pointer-events: none;
-    animation: confettiFall linear forwards;
+    font-size: 24px;
+    animation: floatUp 6s linear forwards;
 }
+.confetti { font-size: 18px; }
 
-@keyframes confettiFall {
-    0% { transform: translateY(0) rotate(0deg); opacity:1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
 }
 </style>
 </head>
 <body>
 
-<!-- ===== Password Screen ===== -->
+<!-- ===== Password ===== -->
 <div id="passwordScreen">
     <h2>Enter the secret code 😏</h2>
-    <input type="password" id="passInput" placeholder="Type here">
-    <button onclick="checkPassword()">Enter 🎵</button>
+    <input type="password" id="passInput" placeholder="Type the secret here">
+    <button onclick="checkPassword()">Enter & Play 🎵</button>
     <p id="passMessage" style="color:#ff4da6;"></p>
 </div>
 
-<!-- ===== Greeting Page ===== -->
-<div id="greetingPage" class="page">
-    <h1>Happy Valentine’s Day, Kyra Karissa 💐</h1>
-    <p id="message"></p>
+<!-- ===== Pages ===== -->
+<div id="page1" class="page active" style="background:url('floral_bg1.jpg') center/cover no-repeat;">
+    <h1>Happy Valentine's Day 💐</h1>
+    <button class="nav" onclick="nextPage(2)">Next ➡️</button>
 </div>
 
-<!-- ===== Gallery Page ===== -->
-<div id="galleryPage" class="page">
-    <div class="gallery-item"><img src="kyra.png" alt="Kyra 1"></div>
-    <div class="gallery-item"><img src="kyra2.png" alt="Kyra 2"></div>
-    <div class="gallery-item"><img src="kyra3.png" alt="Kyra 3"></div>
-    <div class="gallery-item"><img src="kyra4.jpg" alt="Kyra 4"></div>
-    <button onclick="goFinale()">Next 🎉</button>
+<div id="page2" class="page" style="background:url('floral_bg2.jpg') center/cover no-repeat;">
+    <h1>Look at you 😎</h1>
+    <img src="kyra.png" class="framed" style="top:20%; left:10%;">
+    <button class="nav" onclick="nextPage(3)">Next ➡️</button>
 </div>
 
-<!-- ===== Finale Page ===== -->
-<div id="finalePage" class="page">
-    <h1>Will you cheer with me? 😏</h1>
-    <button onclick="playHappySong()">Yea I do 😍</button>
+<div id="page3" class="page" style="background:url('floral_bg3.jpg') center/cover no-repeat;">
+    <h1>Still Stunning ✨</h1>
+    <img src="kyra2.png" class="framed" style="top:25%; left:50%;">
+    <img src="kyra3.png" class="framed" style="top:55%; left:20%;">
+    <button class="nav" onclick="nextPage(4)">Next ➡️</button>
+</div>
+
+<div id="page4" class="page" style="background:url('floral_bg4.jpg') center/cover no-repeat;">
+    <h1>Beautiful Smile 😍</h1>
+    <img src="kyra4.jpg" class="framed" style="top:30%; left:40%;">
+    <button class="nav" onclick="nextPage(5)">Next ➡️</button>
+</div>
+
+<div id="page5" class="page" style="background:url('floral_bg5.jpg') center/cover no-repeat;">
+    <h1>Last Surprise 🎉</h1>
+    <button class="yea" onclick="playHappySong()">Yea I do 😏</button>
 </div>
 
 <!-- ===== Audio ===== -->
-<audio id="bgmusic" loop>
-    <source src="bgm.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="happySong">
-    <source src="happy.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgm" loop><source src="bgm.mp3" type="audio/mpeg"></audio>
+<audio id="happy"><source src="happy.mp3" type="audio/mpeg"></audio>
 
 <script>
-// ===== Password logic =====
+// ===== Variables =====
 const correctPassword = "chickenwing";
-let audio = document.getElementById("bgmusic");
-let happyAudio = document.getElementById("happySong");
-let volume = 0;
+let bgm = document.getElementById("bgm");
+let happy = document.getElementById("happy");
+let heartInterval;
 
+// ===== Password check =====
 function checkPassword(){
     const input = document.getElementById("passInput").value;
     const msg = document.getElementById("passMessage");
     if(input === correctPassword){
-        document.getElementById("passwordScreen").style.display = "none";
-        document.getElementById("greetingPage").style.display = "flex";
-        startGreeting();
-    } else {
-        msg.textContent = "Wrong code 😏 Try again!";
-    }
+        document.getElementById("passwordScreen").style.display='none';
+        showPage(1);
+        bgm.currentTime=0; bgm.play().catch(()=>{});
+        spawnHearts();
+    } else msg.textContent="Wrong code 😏 Try again!";
 }
 
-// ===== Typewriter =====
-const text = "Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\nKeep looking hella pretty aitee.\nAnd am so sorry please forgive me.";
-let i = 0;
-function typeWriter(){
-    if(i < text.length){
-        document.getElementById("message").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 40);
-    }
+// ===== Page navigation with fade =====
+function showPage(num){
+    document.querySelectorAll('.page').forEach(p=>{
+        p.classList.remove('active');
+    });
+    document.getElementById('page'+num).classList.add('active');
 }
 
-// ===== Start Greeting =====
-function startGreeting(){
-    audio.currentTime = 0;
-    audio.play().catch(()=>{});
-    fadeInMusic();
-    typeWriter();
-    // move to gallery after 7 seconds
-    setTimeout(()=>{
-        document.getElementById("greetingPage").style.display = "none";
-        document.getElementById("galleryPage").style.display = "flex";
-    }, 7000);
-}
+function nextPage(num){ showPage(num); }
 
 // ===== Floating Hearts =====
-function createHeart(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random()*100 + "vw";
-    document.body.appendChild(heart);
-    setTimeout(()=>{ heart.remove(); },6000);
-}
-setInterval(createHeart, 600);
-
-// ===== Fade-in Music =====
-function fadeInMusic(){
-    let interval = setInterval(()=>{
-        if(volume < 0.5){
-            volume += 0.01;
-            audio.volume = volume;
-        } else {
-            clearInterval(interval);
-        }
-    }, 60);
+function spawnHearts(){
+    heartInterval = setInterval(()=>{
+        const heart=document.createElement('div');
+        heart.className='heart';
+        heart.innerHTML='💖';
+        heart.style.left=Math.random()*100+'vw';
+        heart.style.fontSize=(16+Math.random()*24)+'px';
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    },500);
 }
 
-// ===== Go to Finale =====
-function goFinale(){
-    document.getElementById("galleryPage").style.display = "none";
-    document.getElementById("finalePage").style.display = "flex";
-}
-
-// ===== Play Happy Song =====
+// ===== Happy Song Trigger =====
 function playHappySong(){
-    // Fade out bgm
-    let fadeInterval = setInterval(()=>{
-        if(audio.volume > 0){
-            audio.volume -= 0.02;
-        } else {
-            audio.pause();
-            audio.volume = 0.5;
-            clearInterval(fadeInterval);
-        }
-    }, 100);
+    // fade out bgm
+    let vol=bgm.volume;
+    const fade = setInterval(()=>{
+        vol -=0.02;
+        if(vol<=0){ bgm.pause(); clearInterval(fade); } else bgm.volume=vol;
+    },60);
 
-    happyAudio.currentTime = 0;
-    happyAudio.play().catch(()=>{});
+    happy.currentTime=0;
+    happy.play().catch(()=>{});
 
-    // confetti for 5 seconds
-    const confettiInterval = setInterval(createConfetti, 100);
-    setTimeout(()=> clearInterval(confettiInterval), 5000);
+    // extra confetti hearts
+    const extra=setInterval(()=>{
+        const c=document.createElement('div');
+        c.className='confetti';
+        c.innerHTML=['🎉','💖','✨'][Math.floor(Math.random()*3)];
+        c.style.left=Math.random()*100+'vw';
+        c.style.fontSize=(16+Math.random()*24)+'px';
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    },200);
+
+    setTimeout(()=>clearInterval(extra),5000);
 }
-
-// ===== Confetti =====
-function createConfetti(){
-    const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
-    confetti.style.left = Math.random()*window.innerWidth + "px";
-    confetti.style.backgroundColor = `hsl(${Math.random()*360}, 80%, 60%)`;
-    confetti.style.width = confetti.style.height = Math.random()*8+4 + "px";
-    document.body.appendChild(confetti);
-    setTimeout(()=> confetti.remove(), 3000);
-}
-
-// ===== Runaway "Nope" Button =====
-const noBtn = document.getElementById("noBtn");
-noBtn?.addEventListener("mouseover", ()=>{
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random()*window.innerWidth + "px";
-    noBtn.style.top = Math.random()*window.innerHeight + "px";
-});
 </script>
-
 </body>
 </html>
