@@ -4,208 +4,119 @@
 <meta charset="UTF-8">
 <title>Kyra Karissa 😎</title>
 <style>
-/* ===== Global CSS ===== */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background: radial-gradient(circle at top, #1a001a, #000000);
-    font-family: 'Arial', sans-serif;
-    color: white;
+    margin:0; padding:0; height:100%; overflow:hidden;
+    background: radial-gradient(circle at top, #1a001a, #000);
+    font-family:'Arial',sans-serif; color:white;
 }
-
-/* ===== Password Screen ===== */
 #passwordScreen {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top:0;
-    left:0;
-    background: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 10;
+    position:absolute; width:100%; height:100%; top:0; left:0;
+    background:black; display:flex; justify-content:center; align-items:center;
+    flex-direction:column; z-index:10;
 }
-
 #passwordScreen input {
-    padding: 12px 20px;
-    font-size: 18px;
-    border-radius: 8px;
-    border: none;
-    margin-bottom: 10px;
+    padding:12px 20px; font-size:18px; border-radius:8px; border:none;
+    margin-bottom:10px;
 }
-
 #passwordScreen button {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    background: #ff4da6;
-    color: white;
+    padding:12px 25px; border:none; border-radius:8px;
+    cursor:pointer; font-weight:bold; background:#ff4da6; color:white;
 }
-
-/* ===== Main Content ===== */
 .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    display: none; /* hidden until password is correct */
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    text-align:center; display:none;
 }
-
-h1 {
-    font-size: 35px;
-    text-shadow: 0 0 15px #ff4da6;
-}
-
-#message {
-    font-size: 18px;
-    width: 80%;
-    margin: 20px auto;
-    line-height: 1.5;
-}
-
-/* ===== Buttons ===== */
-button.cool {
-    background: #ff4da6;
-    color: white;
-    margin: 10px;
-}
-
-button.no {
-    background: gray;
-    color: white;
-    margin: 10px;
-    position: relative;
-}
-
-/* ===== Floating Hearts ===== */
-.heart {
-    position: absolute;
-    bottom: -20px;
-    font-size: 18px;
-    animation: float 6s linear forwards;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100vh); opacity: 0; }
-}
+h1 { font-size:35px; text-shadow:0 0 15px #ff4da6; }
+#message { font-size:18px; width:80%; margin:20px auto; line-height:1.5; }
+button.cool { background:#ff4da6; color:white; margin:10px; }
+button.no { background:gray; color:white; margin:10px; position:relative; }
+.heart { position:absolute; bottom:-20px; font-size:18px; animation:float 6s linear forwards; }
+@keyframes float { 0%{transform:translateY(0);opacity:1;} 100%{transform:translateY(-100vh);opacity:0;} }
 </style>
 </head>
 <body>
 
-<!-- ===== Password Screen ===== -->
 <div id="passwordScreen">
     <h2>Enter the secret code 😏</h2>
     <input type="password" id="passInput" placeholder="Type the secret here">
-    <button onclick="checkPasswordAndPlay()">Enter & Play 🎵</button>
+    <button onclick="checkPassword()">Enter & Play 🎵</button>
     <p id="passMessage" style="color:#ff4da6;"></p>
 </div>
 
-<!-- ===== Main Content ===== -->
 <div class="content">
     <h1>Happy Valentine's Day, Kyra Karissa 💐</h1>
     <p id="message"></p>
-
     <div class="buttons">
         <button class="cool" onclick="playHappySong()">Yea I do 😏</button>
         <button class="no" id="noBtn">Nope I don’t 🙄</button>
     </div>
 </div>
 
-<!-- ===== Background Music ===== -->
+<!-- ===== Audio ===== -->
 <audio id="bgmusic" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8bdb9f6f0f.mp3" type="audio/mpeg">
+    <source src="https://drive.google.com/uc?export=download&id=15Awa3UESGmf2kWvfJo0M_cObFbq548AK" type="audio/mpeg">
+</audio>
+
+<audio id="happySong">
+    <source src="https://drive.google.com/uc?export=download&id=1iO5D_kM-EM7W--MHz-4wHMCSAB7jCBx7" type="audio/mpeg">
 </audio>
 
 <script>
-// ===== Password logic =====
-const correctPassword = "chickenwing";
-let audio = document.getElementById("bgmusic");
-let volume = 0;
-audio.volume = 0;
+const correctPassword="chickenwing";
+let bgAudio=document.getElementById("bgmusic");
+let happyAudio=document.getElementById("happySong");
+bgAudio.volume=0; let volume=0;
 
-// ===== Password submit with direct audio play for mobile =====
-function checkPasswordAndPlay(){
-    const input = document.getElementById("passInput").value;
-    const msg = document.getElementById("passMessage");
-
-    if(input === correctPassword){
-        document.getElementById("passwordScreen").style.display = "none";
-        document.querySelector(".content").style.display = "block";
-
-        // Direct play on user click for mobile
-        audio.currentTime = 0;
-        audio.play().catch(()=>{});
-
+function checkPassword(){
+    const input=document.getElementById("passInput").value;
+    const msg=document.getElementById("passMessage");
+    if(input===correctPassword){
+        document.getElementById("passwordScreen").style.display="none";
+        document.querySelector(".content").style.display="block";
+        bgAudio.currentTime=0; bgAudio.play().catch(()=>{});
         startSurprise();
-    } else {
-        msg.textContent = "Wrong code 😏 Try again!";
-    }
+    } else { msg.textContent="Wrong code 😏 Try again!"; }
 }
 
-// ===== Start Surprise =====
-function startSurprise(){
-    fadeInMusic();
-    typeWriter();
-}
+function startSurprise(){ fadeInMusic(); typeWriter(); }
 
-// ===== Typewriter Message =====
-const text = "Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\n\nKeep looking hella pretty aitee.\n\nAnd am so sorry please forgive me.";
-let i = 0;
+const text="Dear Kyra Karissa, Happy Valentine’s Day Cantiks 😏\n\nKeep looking hella pretty aitee.\n\nAnd am so sorry please forgive me.";
+let i=0;
 function typeWriter(){
-    if(i < text.length){
-        document.getElementById("message").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 40);
+    if(i<text.length){
+        document.getElementById("message").innerHTML+=text.charAt(i);
+        i++; setTimeout(typeWriter,40);
     }
 }
 
-// ===== Floating Hearts =====
 function createHeart(){
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random()*100 + "vw";
+    const heart=document.createElement("div");
+    heart.classList.add("heart"); heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
     document.body.appendChild(heart);
-    setTimeout(()=>{ heart.remove(); },6000);
+    setTimeout(()=>{heart.remove();},6000);
 }
-setInterval(createHeart, 500);
+setInterval(createHeart,500);
 
-// ===== Fade-in Music =====
 function fadeInMusic(){
-    let interval = setInterval(()=>{
-        if(volume < 0.5){
-            volume += 0.01;
-            audio.volume = volume;
-        } else {
-            clearInterval(interval);
-        }
-    }, 60);
+    let interval=setInterval(()=>{
+        if(volume<0.5){volume+=0.01; bgAudio.volume=volume;}
+        else clearInterval(interval);
+    },60);
 }
 
-// ===== Happy Song on "Yea I do" =====
 function playHappySong(){
-    audio.currentTime = 0;
-    audio.play().catch(()=>{}); // direct click triggers audio
-
-    // extra heart celebration for 5 seconds
-    const heartInterval = setInterval(createHeart, 250); 
-    setTimeout(()=> clearInterval(heartInterval), 5000);
+    happyAudio.currentTime=0;
+    happyAudio.play().catch(()=>{});
+    const heartInterval=setInterval(createHeart,250);
+    setTimeout(()=> clearInterval(heartInterval),5000);
 }
 
-// ===== Runaway "Nope I don’t" Button =====
-const noBtn = document.getElementById("noBtn");
-noBtn.addEventListener("mouseover", function(){
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random()*window.innerWidth + "px";
-    noBtn.style.top = Math.random()*window.innerHeight + "px";
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",function(){
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*window.innerWidth+"px";
+    noBtn.style.top=Math.random()*window.innerHeight+"px";
 });
 </script>
 
